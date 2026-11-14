@@ -21,7 +21,7 @@ Figma에서 variable2json 플러그인으로 내보낸 디자인 시스템 토�
 ```
 토큰 JSON (Figma 원본, 저장소에 커밋)
   → normalize 스크립트 (이름 정리, 테스트용 토큰 제외, alias 해석, 단위 변환)
-  → Style Dictionary
+  → 생성 스크립트 (Style Dictionary 또는 직접 만든 스크립트)
       ├─ tokens.css     : CSS 변수 (실제 값은 여기 한 곳에만)
       ├─ _tokens.scss   : Bootstrap용 Sass 변수
       └─ theme.css      : Tailwind v4 @theme
@@ -66,8 +66,8 @@ Bootstrap과 Tailwind가 정의하는 항목을 토큰과 하나씩 대조했더
 
 간격 클래스 이름은 라이브러리마다 다르게 정했습니다.
 
-- **Tailwind**: 기본 규칙(1단위 = 4px)을 유지합니다. Figma 8px는 `p-2`입니다. 문서·예제·AI 도구가 모두 이 규칙을 전제로 하기 때문입니다. `--spacing-md` 같은 semantic 이름을 등록하면 `max-w-md` 같은 다른 클래스까지 영향을 받은 사례가 있어 피했습니다.
-- **Bootstrap**: 기본 간격이 6단계뿐이라 토큰 15단계를 담을 수 없습니다. 키를 px 숫자로 바꿔 `p-8`이 8px가 되게 합니다.
+- **Tailwind**: 기본 규칙(1단위 = 4px)을 유지합니다. Figma 8px는 `p-2`입니다. 문서·예제·AI 도구가 모두 이 규칙을 전제로 하기 때문입니다. `--spacing-md` 같은 semantic 이름을 등록하면 `max-w-md`, `w-md` 값까지 그 변수로 바뀝니다. 직접 빌드해서 확인했고, 그래서 피했습니다.
+- **Bootstrap**: 기본 간격이 6단계뿐이라 토큰 14단계를 담을 수 없습니다. 키를 px 숫자로 바꿔 `p-8`이 8px가 되게 합니다.
 
 ## 라이브러리별로 걸리는 점
 
@@ -80,7 +80,7 @@ Bootstrap과 Tailwind가 정의하는 항목을 토큰과 하나씩 대조했더
 **Tailwind**
 - 토큰의 radius 이름(xs~xl)이 Tailwind 기본과 같은데 값이 달라서, 덮어쓰면 외부 컴포넌트 모양이 바뀝니다.
 - 색상 계열 이름(gray, red, blue…)도 같지만 단계가 다릅니다. 기본 팔레트를 지우고 토큰만 쓸지 정해야 합니다.
-- v4는 색상 네임스페이스가 하나라 `bg-bg-surface-primary`처럼 접두어가 겹치지 않게 이름 규칙을 정해야 합니다.
+- 색상을 `--color-*` 하나에만 넣으면 `bg-bg-surface-primary`처럼 접두어가 겹칩니다. 속성별 네임스페이스(`--background-color-*`, `--text-color-*`, `--border-color-*`)에 나눠 넣으면 `bg-surface-primary`, `text-primary`처럼 깔끔해집니다.
 
 ## 디자이너가 화면을 만드는 방식: 무엇을 고를까
 
@@ -108,6 +108,16 @@ Bootstrap과 Tailwind가 정의하는 항목을 토큰과 하나씩 대조했더
 - 라이브러리가 요구하는 기본값과 상태 토큰(포커스, 검증, 높이, 브레이크포인트)을 디자인 단계에서 먼저 채웁니다.
 - 단위는 크기 계열 rem, 선과 그림자 px, 줄 높이는 비율로 정합니다.
 - 최종 목적지가 Vue/React라면 클래스를 그대로 옮길 수 있는 Tailwind 쪽이 이관 비용이 낮습니다.
+
+## 수정 내역
+
+글을 올린 뒤 Tailwind 라이브러리를 실제로 만들어 보면서 세 군데를 바로잡았습니다.
+
+- Tailwind v4의 색상 네임스페이스가 하나뿐이라고 적었는데, 속성별 네임스페이스가 있습니다.
+- 간격 토큰 단계 수를 15로 적었는데 14입니다.
+- `--spacing-*` 이름 충돌은 전해 들은 사례가 아니라 직접 빌드해 확인한 내용으로 고쳤습니다.
+
+처음에는 생성 도구로 Style Dictionary를 생각했지만, 출력이 Tailwind 하나일 때는 의존성 없는 스크립트로도 충분했습니다.
 
 ## 참고
 
