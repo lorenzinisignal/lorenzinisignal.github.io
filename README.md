@@ -1,39 +1,39 @@
-# Chirpy Starter
+# Today I Learned
 
-[![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy)][gem]&nbsp;
-[![GitHub license](https://img.shields.io/github/license/cotes2020/chirpy-starter.svg?color=blue)][mit]
+매일 배운 것을 기록하는 블로그입니다: <https://lorenzinisignal.github.io>
 
-A minimal, ready-to-use template for creating a blog with the [**Chirpy**][chirpy] Jekyll theme. Get up and running in minutes with all critical files pre-configured.
+[Jekyll](https://jekyllrb.com/)과 [Chirpy](https://github.com/cotes2020/jekyll-theme-chirpy) 테마로 만들었고, `main` 브랜치에 push하면 GitHub Actions가 자동으로 빌드하고 배포합니다.
 
-## Why This Starter Exists
+## 글 작성
 
-When installing Chirpy through [RubyGems.org][gem], Jekyll can only read a subset of theme files (`_data`, `_layouts`, `_includes`, `_sass`, `assets`) and limited `_config.yml` options from the gem. As a result, users cannot enjoy the full out-of-the-box experience that Chirpy offers.
+`_posts/YYYY-MM-DD-영문-slug.md` 파일을 만들고 맨 위에 front matter를 적습니다.
 
-To unlock all features, the following files must be present in your Jekyll site:
-
-```shell
-.
-├── _config.yml
-├── _plugins
-├── _tabs
-└── index.html
+```yaml
+---
+title: "글 제목"
+date: 2026-11-14 09:00:00 +0900
+categories: [Dev, Frontend]   # [대분류, 소분류]
+tags: [javascript, react]     # 태그는 소문자 권장
+---
 ```
 
-This starter bundles those files from the latest **Chirpy** release along with a [CD][CD] workflow, so you can start writing immediately.
+## 카테고리 규칙
 
-## Usage
+대분류는 아래 4개 중 하나만 씁니다. 소분류는 자유롭게 추가해도 되지만, 이미 있는 이름을 다시 쓰는 것을 우선합니다.
 
-Check out the [theme's docs](https://github.com/cotes2020/jekyll-theme-chirpy/wiki).
+| 대분류 | 다루는 내용 | 소분류 예시 |
+|---|---|---|
+| `Dev` | 개발, 프로그래밍 | `Frontend`, `Backend`, `DevOps`, `AI`, `Tools` |
+| `Design` | 디자인, UI/UX | `UI/UX`, `Figma`, `Typography`, `Inspiration` |
+| `Investment` | 투자, 경제 공부 | `Stocks`, `ETF`, `Crypto`, `Economy` |
+| `ETC` | 그 밖의 모든 것 | `Blog`, `Life`, `Books`, `Review` |
 
-## Contributing
+- 카테고리 이름은 대소문자를 구분합니다. `Dev`와 `dev`는 서로 다른 카테고리가 됩니다.
+- 카테고리는 글이 하나 이상 있을 때만 카테고리 페이지에 나타납니다.
 
-This repository is automatically updated with new releases from the theme repository. If you encounter any issues or want to contribute to its improvement, please visit the [theme repository][chirpy] to provide feedback.
+## 로컬 실행
 
-## License
-
-This work is published under [MIT][mit] License.
-
-[gem]: https://rubygems.org/gems/jekyll-theme-chirpy
-[chirpy]: https://github.com/cotes2020/jekyll-theme-chirpy/
-[CD]: https://en.wikipedia.org/wiki/Continuous_deployment
-[mit]: https://github.com/cotes2020/chirpy-starter/blob/master/LICENSE
+```bash
+bundle install
+bundle exec jekyll serve   # http://127.0.0.1:4000
+```
