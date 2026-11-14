@@ -1,6 +1,6 @@
 ---
 title: "디자인 토큰 라이브러리 저장소 구성하기, 그리고 '그 폴더의 값은 어디서 왔나'"
-date: 2026-11-14 22:00:00 +0900
+date: 2026-11-14 21:45:00 +0900
 categories: [Dev, Frontend]
 tags: [design-tokens, tailwind, design-system, repository]
 ---
