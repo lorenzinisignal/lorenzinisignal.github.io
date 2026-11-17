@@ -1,7 +1,7 @@
 ---
 title: "데일리 마켓 브리핑: 2026년 11월 18일"
 date: 2026-11-18 08:30:00 +0900
-categories: [Market, Daily]
+categories: [Finance, Market]
 tags: [market-briefing, nasdaq100, treasury, etf, nvidia]
 ---
 
